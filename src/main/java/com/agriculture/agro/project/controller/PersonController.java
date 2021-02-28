@@ -32,7 +32,7 @@ import com.agriculture.agro.project.service.PersonService;
 public class PersonController {
 	
 	
-private final PersonService personService;
+	private final PersonService personService;
     
     /**
      * Initialize a PersonService object.
@@ -62,7 +62,7 @@ private final PersonService personService;
      * 
      * @return all persons.
      */
-    @GetMapping( path = "/all")
+    @GetMapping()
     public List<Person> getAllPersons(){
         return personService.getAllPersons();
     }
