@@ -32,7 +32,8 @@ import com.agriculture.agro.project.service.PersonService;
 public class PersonController {
 	
 	
-	private final PersonService personService;
+
+    private final PersonService personService;
     
     /**
      * Initialize a PersonService object.
@@ -62,7 +63,7 @@ public class PersonController {
      * 
      * @return all persons.
      */
-    @GetMapping()
+    @GetMapping
     public List<Person> getAllPersons(){
         return personService.getAllPersons();
     }
@@ -107,5 +108,6 @@ public class PersonController {
     public void updatePersonById(@PathVariable("id")UUID id, @Valid @NotNull @RequestBody Person personToUpdate){
         personService.updatePerson(id, personToUpdate);
     }
+
 
 }

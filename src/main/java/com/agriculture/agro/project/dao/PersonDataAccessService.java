@@ -1,17 +1,16 @@
 package com.agriculture.agro.project.dao;
 
-
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-
 
 import org.springframework.stereotype.Repository;
 
 import com.agriculture.agro.project.model.Person;
 
+
 @Repository("postgres")
-public class PersonDataAccess implements IPersonDao{
+public class PersonDataAccessService implements IPersonDao{
 
 	@Override
 	public int insertPerson(UUID id, Person person) {

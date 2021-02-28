@@ -14,9 +14,9 @@ import com.agriculture.agro.project.model.Person;
 @Service
 public class PersonService {
 
-    private final IPersonDao personDao;
-    
-    
+	
+	private final IPersonDao personDao;
+
     @Autowired
     public PersonService(@Qualifier("postgres") IPersonDao personDao){
         this.personDao = personDao;
