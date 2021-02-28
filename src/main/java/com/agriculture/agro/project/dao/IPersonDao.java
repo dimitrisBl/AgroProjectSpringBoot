@@ -21,5 +21,5 @@ public interface IPersonDao {
 	        return insertPerson(id,person);
 	    }
 	    
-	    List<Person> selectAllPersons();
+	    Person selectAllPersons();
 }

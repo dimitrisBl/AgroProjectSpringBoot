@@ -1,6 +1,5 @@
 package com.agriculture.agro.project.controller;
 
-import java.util.List;
 import java.util.UUID;
 
 import javax.validation.Valid;
@@ -64,7 +63,7 @@ public class PersonController {
      * @return all persons.
      */
     @GetMapping
-    public List<Person> getAllPersons(){
+    public Person getAllPersons(){
         return personService.getAllPersons();
     }
     

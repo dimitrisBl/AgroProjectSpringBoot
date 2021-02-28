@@ -37,9 +37,9 @@ public class PersonDataAccessService implements IPersonDao{
 	}
 
 	@Override
-	public List<Person> selectAllPersons() {
+	public Person selectAllPersons() {
 		// TODO Auto-generated method stub
-		return List.of(new Person(UUID.randomUUID(), "This is from postgres database"));
+		return new Person(UUID.randomUUID(), "This is from postgres database");
 	}
 
 }
