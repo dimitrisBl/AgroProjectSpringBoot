@@ -32,7 +32,7 @@ import javax.validation.constraints.NotNull;
  * @author Dimitris
  *
  */
-@RequestMapping("/api")
+@RequestMapping("/api/person")
 @RestController
 public class PersonController {
 		
@@ -46,20 +46,20 @@ public class PersonController {
 	 * 
 	 * @return all persons.
 	 */
-	@GetMapping("/person/all")
+	@GetMapping()
 	public List<Person> getAllPersons() {
 		return personRepository.findAll();
 	}
 	
 	
 	/**
-	 * GET METHOD 
+	 * GET BY ID METHOD
 	 * 
 	 * @param personId
 	 * @return person with current id.
 	 * @throws ResourceNotFoundException
 	 */
-	@GetMapping("/person/{id}")
+	@GetMapping(path = "{id}")
 	public ResponseEntity<Person> getPersonById(@PathVariable(value = "id") Long personId)
 			throws ResourceNotFoundException {
 		Person person = personRepository.findById(personId)
@@ -73,7 +73,7 @@ public class PersonController {
 	 * @param person
 	 * @return a new person
 	 */
-	@PostMapping("/person/add")
+	@PostMapping()
 	public Person createPerson(@Valid @NotNull @RequestBody Person person) {
 		return personRepository.save(person);
 	}
@@ -81,12 +81,14 @@ public class PersonController {
 	/**
 	 * UPDATE METHOD
 	 *  
-	 * @param personId
+	 * This method updates the data for a person with id logic.
+	 *  
+	 * @param personId has the person id.
 	 * @param person
 	 * @return
 	 * @throws ResourceNotFoundException
 	 */
-	@PutMapping("/person/{id}")
+	@PutMapping(path = "{id}")
 	public ResponseEntity<Person> updatePerson(@PathVariable(value = "id") Long personId,
 												@Valid @RequestBody Person person) throws ResourceNotFoundException{
 		
@@ -103,11 +105,13 @@ public class PersonController {
 	/**
 	 * DELETE METHOD
 	 * 
-	 * @param personId
+	 * This method delete user with id logic, the id obtained from the URL.
+	 * 
+	 * @param personId has the person id.
 	 * @return
 	 * @throws ResourceNotFoundException
 	 */
-	@DeleteMapping("/person/{id}")
+	@DeleteMapping(path = "{id}")
 	public Map<String, Boolean> deletePerson(@PathVariable(value = "id") Long personId) throws ResourceNotFoundException{
 		
 		Person entity = personRepository.findById(personId)
