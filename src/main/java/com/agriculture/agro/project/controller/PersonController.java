@@ -116,7 +116,7 @@ public class PersonController {
 		this.personRepository.delete(entity);
 		
 		Map<String, Boolean> response = new HashMap<>();
-		response.put("deleted",Boolean.TRUE);
+		response.put("Person with id: "+personId+" delete.",Boolean.TRUE);
 		
 		return response;
 	}

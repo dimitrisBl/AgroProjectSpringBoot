@@ -34,8 +34,9 @@ public class Person {
     public Person() {
     	super();
     }
-
-    public Person(@JsonProperty("name") String firstName, @JsonProperty("last") String lastName) {
+    
+    //@JsonProperty("name") 
+    public Person(String firstName,String lastName) {
     	super();
 		this.firstName = firstName;
         this.lastName = lastName;
