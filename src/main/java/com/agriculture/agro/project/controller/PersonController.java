@@ -1,11 +1,9 @@
 package com.agriculture.agro.project.controller;
 
-import java.util.UUID;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,8 +13,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.agriculture.agro.project.exception.ResourceNotFoundException;
 import com.agriculture.agro.project.model.Person;
-import com.agriculture.agro.project.service.PersonService;
+import com.agriculture.agro.project.repository.IPersonRepository;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 /**
  * This complete CRUD rest controller for person.
@@ -26,87 +32,92 @@ import com.agriculture.agro.project.service.PersonService;
  * @author Dimitris
  *
  */
-@RequestMapping("api/v1/person")
+@RequestMapping("/api")
 @RestController
 public class PersonController {
+		
+	
+	@Autowired
+	private IPersonRepository personRepository;
+		
+	
+	/**
+	 * GET METHOD
+	 * 
+	 * @return all persons.
+	 */
+	@GetMapping("/person/all")
+	public List<Person> getAllPersons() {
+		return personRepository.findAll();
+	}
 	
 	
-
-    private final PersonService personService;
-    
-    /**
-     * Initialize a PersonService object.
-     * 	
-     * @param personService
-     */
-    @Autowired
-    public PersonController(PersonService personService) {
-        this.personService = personService;
-    }
-    
-    
-    /**
-     * POST METHOD
-     * 
-     * Adds a new person in database.
-     * 
-     * @param person.
-     */
-    @PostMapping
-    public void addPerson(@Valid @NotNull @RequestBody Person person){
-        personService.addPerson(person);
-    }
-    
-    /**
-     * GET METHOD
-     * 
-     * @return all persons.
-     */
-    @GetMapping
-    public Person getAllPersons(){
-        return personService.getAllPersons();
-    }
-    
-    /**
-     * GET BY ID 
-     * 
-     * ENDPOINT: http://localhost:8080/api/v1/person/THE-ID-HERE
-     * 
-     * @param id haves the person id.
-     * @return a person with an ID received from the url.
-     */
-    @GetMapping(path = "{id}")
-    public Person getPersonById(@PathVariable("id") UUID id){
-        return personService.getPersonById(id)
-                .orElse(null);
-    }
-    
-    /**
-     * DELETE METHOD
-     * 
-     * ENDPOINT: http://localhost:8080/api/v1/person/THE-ID-HERE
-     * 
-     * This method delete user with id logic, the id obtained from the url.
-     * @param id haves the id for any person.
-     */
-    @DeleteMapping(path = "{id}")
-    public void deletePersonById(@PathVariable("id") UUID id){
-            personService.deletePerson(id);
-    }
-    
-    /**
-     * PUT METHOD
-     * 
-     * ENDPOINT: http://localhost:8080/api/v1/person/THE-ID-HERE
-     * 
-     * This method updates the data for a person with id logic. 
-     * @param id the person id
-     * @param personToUpdate is the person object which will updated 
-     */
-    @PutMapping( path = "{id}")
-    public void updatePersonById(@PathVariable("id")UUID id, @Valid @NotNull @RequestBody Person personToUpdate){
-        personService.updatePerson(id, personToUpdate);
-    }
-
-
+	/**
+	 * GET METHOD 
+	 * 
+	 * @param personId
+	 * @return person with current id.
+	 * @throws ResourceNotFoundException
+	 */
+	@GetMapping("/person/{id}")
+	public ResponseEntity<Person> getPersonById(@PathVariable(value = "id") Long personId)
+			throws ResourceNotFoundException {
+		Person person = personRepository.findById(personId)
+				.orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + personId));
+		return ResponseEntity.ok().body(person);
+	}
+	
+	/**
+	 * POST METHOD
+	 * 
+	 * @param person
+	 * @return a new person
+	 */
+	@PostMapping("/person/add")
+	public Person createPerson(@Valid @NotNull @RequestBody Person person) {
+		return personRepository.save(person);
+	}
+	
+	/**
+	 * UPDATE METHOD
+	 *  
+	 * @param personId
+	 * @param person
+	 * @return
+	 * @throws ResourceNotFoundException
+	 */
+	@PutMapping("/person/{id}")
+	public ResponseEntity<Person> updatePerson(@PathVariable(value = "id") Long personId,
+												@Valid @RequestBody Person person) throws ResourceNotFoundException{
+		
+		Person entity = personRepository.findById(personId)
+				.orElseThrow(() -> new ResourceNotFoundException("Person not found for this id: " + personId));
+		
+		
+		entity.setFirstName(person.getFirstName());
+		entity.setLastName(person.getLastName());
+		
+		return ResponseEntity.ok(this.personRepository.save(entity));
+	}
+	
+	/**
+	 * DELETE METHOD
+	 * 
+	 * @param personId
+	 * @return
+	 * @throws ResourceNotFoundException
+	 */
+	@DeleteMapping("/person/{id}")
+	public Map<String, Boolean> deletePerson(@PathVariable(value = "id") Long personId) throws ResourceNotFoundException{
+		
+		Person entity = personRepository.findById(personId)
+				.orElseThrow(() -> new ResourceNotFoundException("Person not found for this id: " + personId));
+		
+		this.personRepository.delete(entity);
+		
+		Map<String, Boolean> response = new HashMap<>();
+		response.put("deleted",Boolean.TRUE);
+		
+		return response;
+	}
 }
