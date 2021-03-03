@@ -63,7 +63,7 @@ public class PersonController {
 	public ResponseEntity<Person> getPersonById(@PathVariable(value = "id") Long personId)
 			throws ResourceNotFoundException {
 		Person person = personRepository.findById(personId)
-				.orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + personId));
+				.orElseThrow(() -> new ResourceNotFoundException("Person not found for this id: " + personId));
 		return ResponseEntity.ok().body(person);
 	}
 	
