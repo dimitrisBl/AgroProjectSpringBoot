@@ -1,4 +1,4 @@
-package com.agriculture.agro.project.model;
+package com.agriculture.agro.project.person.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

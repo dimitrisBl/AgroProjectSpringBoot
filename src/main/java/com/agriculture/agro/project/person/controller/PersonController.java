@@ -1,7 +1,8 @@
-package com.agriculture.agro.project.controller;
+package com.agriculture.agro.project.person.controller;
 
 
 
+import com.agriculture.agro.project.person.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,8 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.agriculture.agro.project.exception.ResourceNotFoundException;
-import com.agriculture.agro.project.model.Person;
-import com.agriculture.agro.project.repository.IPersonRepository;
+import com.agriculture.agro.project.person.repository.IPersonRepository;
 
 import java.util.HashMap;
 import java.util.List;
