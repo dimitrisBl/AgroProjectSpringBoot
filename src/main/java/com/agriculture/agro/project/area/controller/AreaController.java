@@ -3,8 +3,6 @@ package com.agriculture.agro.project.area.controller;
 import com.agriculture.agro.project.area.model.Area;
 import com.agriculture.agro.project.area.repository.IAreaRepository;
 import com.agriculture.agro.project.exception.ResourceNotFoundException;
-import com.agriculture.agro.project.person.model.Person;
-import com.agriculture.agro.project.person.repository.IPersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
