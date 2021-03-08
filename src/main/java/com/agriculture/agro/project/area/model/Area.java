@@ -62,10 +62,12 @@ public class Area {
     public long getId() {
         return id;
     }
+
     @Column(name = "description", nullable = false)
     public String getDescription() {
         return description;
     }
+
     @Column(name = "name", nullable = false)
     public String getName() {
         return name;

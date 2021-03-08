@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@RequestMapping("/api/person")
+@RequestMapping("/api/area")
 @RestController
 public class AreaController {
 
@@ -30,7 +30,7 @@ public class AreaController {
      * @return all Areas.
      */
     @GetMapping()
-    public List<Area> getAllPersons() {
+    public List<Area> getAllAreas() {
         return iAreaRepository.findAll();
     }
 
@@ -39,14 +39,14 @@ public class AreaController {
      * GET BY ID METHOD
      *
      * @param areaId
-     * @return person with current id.
+     * @return area with current id.
      * @throws ResourceNotFoundException
      */
     @GetMapping(path = "{id}")
     public ResponseEntity<Area> getAreaById(@PathVariable(value = "id") Long areaId)
             throws ResourceNotFoundException {
         Area area = iAreaRepository.findById(areaId)
-                .orElseThrow(() -> new ResourceNotFoundException("Person not found for this id: " + areaId));
+                .orElseThrow(() -> new ResourceNotFoundException("Area not found for this id: " + areaId));
         return ResponseEntity.ok().body(area);
     }
 
@@ -76,7 +76,7 @@ public class AreaController {
                                            @Valid @RequestBody Area area) throws ResourceNotFoundException {
 
         Area entity = iAreaRepository.findById(areaId)
-                .orElseThrow(() -> new ResourceNotFoundException("Person not found for this id: " + areaId));
+                .orElseThrow(() -> new ResourceNotFoundException("Area not found for this id: " + areaId));
 
 
         entity.setDescription(area.getDescription());
@@ -103,7 +103,7 @@ public class AreaController {
         this.iAreaRepository.delete(entity);
 
         Map<String, Boolean> response = new HashMap<>();
-        response.put("Person with id " + areaId + " deleted. ", Boolean.TRUE);
+        response.put("Area with id " + areaId + " deleted. ", Boolean.TRUE);
 
         return response;
     }
