@@ -20,9 +20,9 @@ public class Area {
     @Column(name = "name")
     private String name;
 
-
-//    @Column(name = "points")
-//    private int points;
+    @NotBlank
+    @Column(name = "points")
+    private int points;
 
     /**
      * Default constructor.
@@ -80,8 +80,8 @@ public class Area {
         return name;
     }
 
-//    @Column(name = "points", nullable = false)
-//    public int getPoints() {
-//        return points;
-//    }
+    @Column(name = "points", nullable = false)
+    public int getPoints() {
+        return points;
+    }
 }
