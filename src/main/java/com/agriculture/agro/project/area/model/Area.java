@@ -20,7 +20,7 @@ public class Area {
     @Column(name = "name")
     private String name;
 
-    @NotBlank
+
     @Column(name = "points")
     private double points;
 
