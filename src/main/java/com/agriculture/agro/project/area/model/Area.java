@@ -39,11 +39,11 @@ public class Area {
      * @param description
      * @param name
      */
-    public Area(String description,String name, double points) {
+    public Area(String description,String name, int points) {
         super();
         this.description = description;
         this.name = name;
-       // this.points = points;
+        this.points = points;
     }
 
     public void setId(long id) {
@@ -69,6 +69,7 @@ public class Area {
     public long getId() {
         return id;
     }
+
 
     @Column(name = "description", nullable = false)
     public String getDescription() {
