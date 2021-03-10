@@ -84,4 +84,6 @@ public class Area {
     public int getPoints() {
         return points;
     }
+
+    ////
 }
