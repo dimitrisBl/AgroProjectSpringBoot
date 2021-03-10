@@ -22,7 +22,8 @@ public class Area {
 
     @NotBlank
     @Column(name = "points")
-    private int points;
+    private String points;
+
 
     /**
      * Default constructor.
@@ -39,16 +40,13 @@ public class Area {
      * @param description
      * @param name
      */
-    public Area(String description,String name, int points) {
+    public Area(String description,String name, String points) {
         super();
         this.description = description;
         this.name = name;
         this.points = points;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
     /**
      * Set area description
      *
@@ -82,9 +80,8 @@ public class Area {
     }
 
     @Column(name = "points", nullable = false)
-    public int getPoints() {
+    public String getPoints() {
         return points;
     }
 
-    ////
 }
