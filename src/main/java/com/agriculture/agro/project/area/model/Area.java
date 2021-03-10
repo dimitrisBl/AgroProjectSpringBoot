@@ -22,7 +22,7 @@ public class Area {
 
     @NotBlank
     @Column(name = "points")
-    private double points;
+    private int points;
 
     /**
      * Default constructor.
@@ -81,7 +81,7 @@ public class Area {
     }
 
     @Column(name = "points", nullable = false)
-    public double getPoints() {
+    public int getPoints() {
         return points;
     }
 }
