@@ -98,6 +98,7 @@ public class PersonController {
 		
 		entity.setFirstName(person.getFirstName());
 		entity.setLastName(person.getLastName());
+		entity.setPoints(person.getPoints());
 		
 		return ResponseEntity.ok(this.personRepository.save(entity));
 	}

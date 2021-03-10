@@ -48,10 +48,11 @@ public class Person {
      * @param firstName
      * @param lastName
      */
-    public Person(String firstName,String lastName) {
+    public Person(String firstName,String lastName,String points) {
     	super();
 		this.firstName = firstName;
         this.lastName = lastName;
+        this.points = points;
     }
 
     /**
@@ -80,6 +81,15 @@ public class Person {
 	public String getLastName() {
 		return lastName;
 	}
+	
+	/**
+	 * 
+	 * @return person lastName.
+	 */
+	@Column(name = "points", nullable = false)
+	public String getPoints() {
+		return points;
+	}
 
 
 	/**
@@ -100,4 +110,16 @@ public class Person {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+	
+	
+	/**
+	 * Set person lastName
+	 * 
+	 * @param lastName has the lastName of the person.
+	 */
+	public void setPoints(String points) {
+		this.points = points;
+	}
+	
+	
 }	
