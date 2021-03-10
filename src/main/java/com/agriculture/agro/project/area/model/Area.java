@@ -20,6 +20,10 @@ public class Area {
     @Column(name = "name")
     private String name;
 
+    @NotBlank
+    @Column(name = "points")
+    private double points;
+
     /**
      * Default constructor.
      */
@@ -27,16 +31,19 @@ public class Area {
         super();
     }
 
+
+
     /**
      * Instantiate a new Area
      *
      * @param description
      * @param name
      */
-    public Area(String description,String name) {
+    public Area(String description,String name, double points) {
         super();
         this.description = description;
         this.name = name;
+       // this.points = points;
     }
 
     public void setId(long id) {
@@ -71,5 +78,10 @@ public class Area {
     @Column(name = "name", nullable = false)
     public String getName() {
         return name;
+    }
+
+    @Column(name = "points", nullable = false)
+    public double getPoints() {
+        return points;
     }
 }
